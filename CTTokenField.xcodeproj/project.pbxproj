@@ -16,6 +16,17 @@
 		6AC390CC171510C10069C943 /* libCTTokenField.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC390B3171510C10069C943 /* libCTTokenField.a */; };
 		6AC390D2171510C10069C943 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AC390D0171510C10069C943 /* InfoPlist.strings */; };
 		6AC390D5171510C10069C943 /* CTTokenFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC390D4171510C10069C943 /* CTTokenFieldTests.m */; };
+		6AC390E3171510F80069C943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC390C7171510C10069C943 /* UIKit.framework */; };
+		6AC390E4171510F80069C943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC390B6171510C10069C943 /* Foundation.framework */; };
+		6AC390E6171510F80069C943 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC390E5171510F80069C943 /* CoreGraphics.framework */; };
+		6AC390EC171510F80069C943 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AC390EA171510F80069C943 /* InfoPlist.strings */; };
+		6AC390EE171510F80069C943 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC390ED171510F80069C943 /* main.m */; };
+		6AC390F2171510F80069C943 /* CTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC390F1171510F80069C943 /* CTAppDelegate.m */; };
+		6AC390F4171510F80069C943 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AC390F3171510F80069C943 /* Default.png */; };
+		6AC390F6171510F80069C943 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AC390F5171510F80069C943 /* Default@2x.png */; };
+		6AC390F8171510F80069C943 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AC390F7171510F80069C943 /* Default-568h@2x.png */; };
+		6AC390FB171510F80069C943 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AC390F9171510F80069C943 /* MainStoryboard.storyboard */; };
+		6AC390FE171510F80069C943 /* CTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC390FD171510F80069C943 /* CTViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +65,20 @@
 		6AC390D1171510C10069C943 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6AC390D3171510C10069C943 /* CTTokenFieldTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTTokenFieldTests.h; sourceTree = "<group>"; };
 		6AC390D4171510C10069C943 /* CTTokenFieldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTTokenFieldTests.m; sourceTree = "<group>"; };
+		6AC390E2171510F80069C943 /* CTTokenFieldSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTTokenFieldSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AC390E5171510F80069C943 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6AC390E9171510F80069C943 /* CTTokenFieldSample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CTTokenFieldSample-Info.plist"; sourceTree = "<group>"; };
+		6AC390EB171510F80069C943 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6AC390ED171510F80069C943 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6AC390EF171510F80069C943 /* CTTokenFieldSample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTTokenFieldSample-Prefix.pch"; sourceTree = "<group>"; };
+		6AC390F0171510F80069C943 /* CTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTAppDelegate.h; sourceTree = "<group>"; };
+		6AC390F1171510F80069C943 /* CTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTAppDelegate.m; sourceTree = "<group>"; };
+		6AC390F3171510F80069C943 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		6AC390F5171510F80069C943 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		6AC390F7171510F80069C943 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6AC390FA171510F80069C943 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		6AC390FC171510F80069C943 /* CTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTViewController.h; sourceTree = "<group>"; };
+		6AC390FD171510F80069C943 /* CTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +101,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6AC390DF171510F80069C943 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC390E3171510F80069C943 /* UIKit.framework in Frameworks */,
+				6AC390E4171510F80069C943 /* Foundation.framework in Frameworks */,
+				6AC390E6171510F80069C943 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -84,6 +119,7 @@
 			children = (
 				6AC390B8171510C10069C943 /* CTTokenField */,
 				6AC390CD171510C10069C943 /* CTTokenFieldTests */,
+				6AC390E7171510F80069C943 /* CTTokenFieldSample */,
 				6AC390B5171510C10069C943 /* Frameworks */,
 				6AC390B4171510C10069C943 /* Products */,
 			);
@@ -94,6 +130,7 @@
 			children = (
 				6AC390B3171510C10069C943 /* libCTTokenField.a */,
 				6AC390C4171510C10069C943 /* CTTokenFieldTests.octest */,
+				6AC390E2171510F80069C943 /* CTTokenFieldSample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +141,7 @@
 				6AC390B6171510C10069C943 /* Foundation.framework */,
 				6AC390C5171510C10069C943 /* SenTestingKit.framework */,
 				6AC390C7171510C10069C943 /* UIKit.framework */,
+				6AC390E5171510F80069C943 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -141,6 +179,33 @@
 			children = (
 				6AC390CF171510C10069C943 /* CTTokenFieldTests-Info.plist */,
 				6AC390D0171510C10069C943 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6AC390E7171510F80069C943 /* CTTokenFieldSample */ = {
+			isa = PBXGroup;
+			children = (
+				6AC390F0171510F80069C943 /* CTAppDelegate.h */,
+				6AC390F1171510F80069C943 /* CTAppDelegate.m */,
+				6AC390F9171510F80069C943 /* MainStoryboard.storyboard */,
+				6AC390FC171510F80069C943 /* CTViewController.h */,
+				6AC390FD171510F80069C943 /* CTViewController.m */,
+				6AC390E8171510F80069C943 /* Supporting Files */,
+			);
+			path = CTTokenFieldSample;
+			sourceTree = "<group>";
+		};
+		6AC390E8171510F80069C943 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6AC390E9171510F80069C943 /* CTTokenFieldSample-Info.plist */,
+				6AC390EA171510F80069C943 /* InfoPlist.strings */,
+				6AC390ED171510F80069C943 /* main.m */,
+				6AC390EF171510F80069C943 /* CTTokenFieldSample-Prefix.pch */,
+				6AC390F3171510F80069C943 /* Default.png */,
+				6AC390F5171510F80069C943 /* Default@2x.png */,
+				6AC390F7171510F80069C943 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -184,6 +249,23 @@
 			productReference = 6AC390C4171510C10069C943 /* CTTokenFieldTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		6AC390E1171510F80069C943 /* CTTokenFieldSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AC390FF171510F80069C943 /* Build configuration list for PBXNativeTarget "CTTokenFieldSample" */;
+			buildPhases = (
+				6AC390DE171510F80069C943 /* Sources */,
+				6AC390DF171510F80069C943 /* Frameworks */,
+				6AC390E0171510F80069C943 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTTokenFieldSample;
+			productName = CTTokenFieldSample;
+			productReference = 6AC390E2171510F80069C943 /* CTTokenFieldSample.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -207,6 +289,7 @@
 			targets = (
 				6AC390B2171510C10069C943 /* CTTokenField */,
 				6AC390C3171510C10069C943 /* CTTokenFieldTests */,
+				6AC390E1171510F80069C943 /* CTTokenFieldSample */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +300,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AC390D2171510C10069C943 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AC390E0171510F80069C943 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC390EC171510F80069C943 /* InfoPlist.strings in Resources */,
+				6AC390F4171510F80069C943 /* Default.png in Resources */,
+				6AC390F6171510F80069C943 /* Default@2x.png in Resources */,
+				6AC390F8171510F80069C943 /* Default-568h@2x.png in Resources */,
+				6AC390FB171510F80069C943 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +350,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6AC390DE171510F80069C943 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC390EE171510F80069C943 /* main.m in Sources */,
+				6AC390F2171510F80069C943 /* CTAppDelegate.m in Sources */,
+				6AC390FE171510F80069C943 /* CTViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -272,6 +377,22 @@
 				6AC390D1171510C10069C943 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6AC390EA171510F80069C943 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AC390EB171510F80069C943 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6AC390F9171510F80069C943 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AC390FA171510F80069C943 /* en */,
+			);
+			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -301,7 +422,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -324,7 +445,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -384,6 +505,39 @@
 			};
 			name = Release;
 		};
+		6AC39100171510F80069C943 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CTTokenFieldSample/CTTokenFieldSample-Prefix.pch";
+				INFOPLIST_FILE = "CTTokenFieldSample/CTTokenFieldSample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6AC39101171510F80069C943 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CTTokenFieldSample/CTTokenFieldSample-Prefix.pch";
+				INFOPLIST_FILE = "CTTokenFieldSample/CTTokenFieldSample-Info.plist";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -409,6 +563,14 @@
 			buildConfigurations = (
 				6AC390DC171510C10069C943 /* Debug */,
 				6AC390DD171510C10069C943 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6AC390FF171510F80069C943 /* Build configuration list for PBXNativeTarget "CTTokenFieldSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AC39100171510F80069C943 /* Debug */,
+				6AC39101171510F80069C943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
