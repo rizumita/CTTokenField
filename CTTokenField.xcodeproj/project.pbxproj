@@ -27,6 +27,20 @@
 		6AC390F8171510F80069C943 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AC390F7171510F80069C943 /* Default-568h@2x.png */; };
 		6AC390FB171510F80069C943 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AC390F9171510F80069C943 /* MainStoryboard.storyboard */; };
 		6AC390FE171510F80069C943 /* CTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC390FD171510F80069C943 /* CTViewController.m */; };
+		6AC39102171511AC0069C943 /* CTTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC390BD171510C10069C943 /* CTTokenField.m */; };
+		6AC39103171511AC0069C943 /* CTTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC390BD171510C10069C943 /* CTTokenField.m */; };
+		6AC391AD1718C95F0069C943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC391AC1718C95F0069C943 /* QuartzCore.framework */; };
+		6AC391AF1718C9640069C943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC391AE1718C9640069C943 /* UIKit.framework */; };
+		6AC391B01718C96E0069C943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC391AC1718C95F0069C943 /* QuartzCore.framework */; };
+		6AC391B11718C9740069C943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC391AC1718C95F0069C943 /* QuartzCore.framework */; };
+		CB8760324D698B1FA9185D81 /* CTTokenTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8768DDB491A8D9B2672CC3 /* CTTokenTextField.m */; };
+		CB8763F4EFC19EB873AB9487 /* CTTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB876430284B87B84A5AF8E1 /* CTTokenView.m */; };
+		CB87654E7317E2A80E89DCCF /* CTTokenTextField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CB8761F947C57F4AB61CDD60 /* CTTokenTextField.h */; };
+		CB876565C7348036506CE7FD /* CTTokenTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8768DDB491A8D9B2672CC3 /* CTTokenTextField.m */; };
+		CB87675C14C7248CD9E41DC7 /* CTTokenTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8768DDB491A8D9B2672CC3 /* CTTokenTextField.m */; };
+		CB87678DF88E38A751C4C7D6 /* CTTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB876430284B87B84A5AF8E1 /* CTTokenView.m */; };
+		CB876BB0AE807986AE50D0BA /* CTTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB876430284B87B84A5AF8E1 /* CTTokenView.m */; };
+		CB876F66D7B880C9EF8C64AA /* CTTokenView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CB8768D19EEE906D39125662 /* CTTokenView.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +61,8 @@
 			dstSubfolderSpec = 16;
 			files = (
 				6AC390BC171510C10069C943 /* CTTokenField.h in CopyFiles */,
+				CB876F66D7B880C9EF8C64AA /* CTTokenView.h in CopyFiles */,
+				CB87654E7317E2A80E89DCCF /* CTTokenTextField.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +95,12 @@
 		6AC390FA171510F80069C943 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		6AC390FC171510F80069C943 /* CTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTViewController.h; sourceTree = "<group>"; };
 		6AC390FD171510F80069C943 /* CTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTViewController.m; sourceTree = "<group>"; };
+		6AC391AC1718C95F0069C943 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6AC391AE1718C9640069C943 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CB8761F947C57F4AB61CDD60 /* CTTokenTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTokenTextField.h; sourceTree = "<group>"; };
+		CB876430284B87B84A5AF8E1 /* CTTokenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTokenView.m; sourceTree = "<group>"; };
+		CB8768D19EEE906D39125662 /* CTTokenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTokenView.h; sourceTree = "<group>"; };
+		CB8768DDB491A8D9B2672CC3 /* CTTokenTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTokenTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC391AF1718C9640069C943 /* UIKit.framework in Frameworks */,
+				6AC391AD1718C95F0069C943 /* QuartzCore.framework in Frameworks */,
 				6AC390B7171510C10069C943 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC391B01718C96E0069C943 /* QuartzCore.framework in Frameworks */,
 				6AC390C6171510C10069C943 /* SenTestingKit.framework in Frameworks */,
 				6AC390C8171510C10069C943 /* UIKit.framework in Frameworks */,
 				6AC390C9171510C10069C943 /* Foundation.framework in Frameworks */,
@@ -105,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC391B11718C9740069C943 /* QuartzCore.framework in Frameworks */,
 				6AC390E3171510F80069C943 /* UIKit.framework in Frameworks */,
 				6AC390E4171510F80069C943 /* Foundation.framework in Frameworks */,
 				6AC390E6171510F80069C943 /* CoreGraphics.framework in Frameworks */,
@@ -117,6 +143,8 @@
 		6AC390AA171510C10069C943 = {
 			isa = PBXGroup;
 			children = (
+				6AC391AE1718C9640069C943 /* UIKit.framework */,
+				6AC391AC1718C95F0069C943 /* QuartzCore.framework */,
 				6AC390B8171510C10069C943 /* CTTokenField */,
 				6AC390CD171510C10069C943 /* CTTokenFieldTests */,
 				6AC390E7171510F80069C943 /* CTTokenFieldSample */,
@@ -152,6 +180,10 @@
 				6AC390BB171510C10069C943 /* CTTokenField.h */,
 				6AC390BD171510C10069C943 /* CTTokenField.m */,
 				6AC390B9171510C10069C943 /* Supporting Files */,
+				CB876430284B87B84A5AF8E1 /* CTTokenView.m */,
+				CB8768D19EEE906D39125662 /* CTTokenView.h */,
+				CB8768DDB491A8D9B2672CC3 /* CTTokenTextField.m */,
+				CB8761F947C57F4AB61CDD60 /* CTTokenTextField.h */,
 			);
 			path = CTTokenField;
 			sourceTree = "<group>";
@@ -339,6 +371,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AC390BE171510C10069C943 /* CTTokenField.m in Sources */,
+				CB87678DF88E38A751C4C7D6 /* CTTokenView.m in Sources */,
+				CB8760324D698B1FA9185D81 /* CTTokenTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +381,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AC390D5171510C10069C943 /* CTTokenFieldTests.m in Sources */,
+				6AC39102171511AC0069C943 /* CTTokenField.m in Sources */,
+				CB876BB0AE807986AE50D0BA /* CTTokenView.m in Sources */,
+				CB876565C7348036506CE7FD /* CTTokenTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +394,9 @@
 				6AC390EE171510F80069C943 /* main.m in Sources */,
 				6AC390F2171510F80069C943 /* CTAppDelegate.m in Sources */,
 				6AC390FE171510F80069C943 /* CTViewController.m in Sources */,
+				6AC39103171511AC0069C943 /* CTTokenField.m in Sources */,
+				CB8763F4EFC19EB873AB9487 /* CTTokenView.m in Sources */,
+				CB87675C14C7248CD9E41DC7 /* CTTokenTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +462,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -445,7 +485,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -557,6 +597,7 @@
 				6AC390DA171510C10069C943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6AC390DB171510C10069C943 /* Build configuration list for PBXNativeTarget "CTTokenFieldTests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +606,7 @@
 				6AC390DD171510C10069C943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6AC390FF171510F80069C943 /* Build configuration list for PBXNativeTarget "CTTokenFieldSample" */ = {
 			isa = XCConfigurationList;
@@ -573,6 +615,7 @@
 				6AC39101171510F80069C943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

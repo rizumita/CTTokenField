@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CTTokenField.h"
 
-@interface CTViewController : UIViewController
+@interface CTViewController : UIViewController <CTTokenFieldDataSource, CTTokenFieldDelegate>
+@property (weak, nonatomic) IBOutlet CTTokenField *tokenField;
 
 @end
