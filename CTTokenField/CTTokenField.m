@@ -226,25 +226,27 @@ NSString *const CTTokenFieldFrameKey = @"CTTokenFieldFrame";
 
 - (void)addTokenViewWithText:(NSString *)text
 {
-    NSUInteger index = self.tokenViews.count;
+    @synchronized (self) {
+        NSUInteger index = self.tokenViews.count;
 
-    [self deselectTokenViewAtIndex:self.selectedTokenViewIndex];
+        [self deselectTokenViewAtIndex:self.selectedTokenViewIndex];
 
-    [self.dataSource tokenField:self willAddTokenViewWithText:text atIndex:index];
+        [self.dataSource tokenField:self willAddTokenViewWithText:text atIndex:index];
 
-    CTTokenView *tokenView = [self.dataSource tokenField:self tokenViewAtIndex:index];
-    tokenView.tokenField = self;
-    [self addSubview:tokenView];
-    [self.tokenViews insertObject:tokenView atIndex:index];
+        CTTokenView *tokenView = [self.dataSource tokenField:self tokenViewAtIndex:index];
+        tokenView.tokenField = self;
+        [self addSubview:tokenView];
+        [self.tokenViews insertObject:tokenView atIndex:index];
 
-    if ([self.dataSource respondsToSelector:@selector(tokenField:didAddTokenViewWithText:atIndex:)]) {
-        [self.dataSource tokenField:self didAddTokenViewWithText:text atIndex:index];
+        if ([self.dataSource respondsToSelector:@selector(tokenField:didAddTokenViewWithText:atIndex:)]) {
+            [self.dataSource tokenField:self didAddTokenViewWithText:text atIndex:index];
+        }
+
+        [self layoutTokenViewsAnimated:NO];
+        [self layoutTextField];
+        [self layoutAddButton];
+        [self resizeIfNeeded:YES];
     }
-
-    [self layoutTokenViewsAnimated:NO];
-    [self layoutTextField];
-    [self layoutAddButton];
-    [self resizeIfNeeded:YES];
 }
 
 - (void)removeTokenView:(CTTokenView *)tokenView
