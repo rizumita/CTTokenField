@@ -20,19 +20,15 @@
 
 #define CTTokenFieldTextFieldMinWidth 50.0
 
+#define CTTokenFieldAnimationDuration 0.2
+
+extern NSString *const CTTokenFieldFrameKey;
+
 @class CTTokenView;
 
-
 @protocol CTTokenFieldDataSource;
+
 @protocol CTTokenFieldDelegate;
-
-
-typedef NS_ENUM(NSInteger, CTTokenFieldEditingStyle)
-{
-    CTTokenFieldEditingStyleNone,
-    CTTokenFieldEditingStyleDelete,
-    CTTokenFieldEditingStyleInsert,
-};
 
 
 @interface CTTokenField : UIView <UITextFieldDelegate, UIGestureRecognizerDelegate>
@@ -76,6 +72,8 @@ typedef NS_ENUM(NSInteger, CTTokenFieldEditingStyle)
 
 - (CTTokenView *)tokenField:(CTTokenField *)tokenField tokenViewAtIndex:(NSUInteger)index;
 
+- (BOOL)tokenField:(CTTokenField *)tokenField shouldAddTokenViewWithText:(NSString *)text;
+
 - (void)tokenField:(CTTokenField *)tokenField willAddTokenViewWithText:(NSString *)text atIndex:(NSUInteger)index;
 
 - (void)tokenField:(CTTokenField *)tokenField willRemoveTokenViewAtIndex:(NSUInteger)index;
@@ -113,8 +111,6 @@ typedef NS_ENUM(NSInteger, CTTokenFieldEditingStyle)
 
 /* Managing Add Button */
 - (UIButton *)addButtonInTokenField:(CTTokenField *)tokenField;
-
-- (BOOL)shouldShowAddButtonInTokenField:(CTTokenField *)tokenField;
 
 - (void)addButtonDidTappedInTokenField:(CTTokenField *)tokenField;
 

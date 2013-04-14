@@ -13,6 +13,9 @@
 #import "CTTokenTextField.h"
 
 
+NSString *const CTTokenFieldFrameKey = @"CTTokenFieldFrame";
+
+
 @interface CTTokenField ()
 @property (nonatomic, strong) UIButton *addButton;
 @property (nonatomic, strong) NSMutableOrderedSet *tokenViews;
@@ -217,11 +220,7 @@
         [self layoutTokenViewsAnimated:NO];
         [self layoutTextField];
         [self layoutAddButton];
-        [UIView animateWithDuration:0.2 animations:^{
-            [self sizeToFit];
-        }                completion:^(BOOL finished) {
-            [self setNeedsDisplay];
-        }];
+        [self resizeIfNeeded:NO];
     }
 }
 
@@ -229,9 +228,9 @@
 {
     NSUInteger index = self.tokenViews.count;
 
-    [self.dataSource tokenField:self willAddTokenViewWithText:text atIndex:index];
-
     [self deselectTokenViewAtIndex:self.selectedTokenViewIndex];
+
+    [self.dataSource tokenField:self willAddTokenViewWithText:text atIndex:index];
 
     CTTokenView *tokenView = [self.dataSource tokenField:self tokenViewAtIndex:index];
     tokenView.tokenField = self;
@@ -245,11 +244,7 @@
     [self layoutTokenViewsAnimated:NO];
     [self layoutTextField];
     [self layoutAddButton];
-    [UIView animateWithDuration:0.2 animations:^{
-        [self sizeToFit];
-    }                completion:^(BOOL finished) {
-        [self setNeedsDisplay];
-    }];
+    [self resizeIfNeeded:YES];
 }
 
 - (void)removeTokenView:(CTTokenView *)tokenView
@@ -329,12 +324,6 @@
     }
 }
 
-
-- (CGSize)sizeThatFits:(CGSize)size
-{
-    return CGSizeMake(size.width, self.rowNumber * self.rowHeight);
-}
-
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect
@@ -368,9 +357,7 @@
     [self layoutTextField];
     [self layoutAddButton];
 
-    [UIView animateWithDuration:0.2 animations:^{
-        [self sizeToFit];
-    }];
+    [self resizeIfNeeded:NO];
 }
 
 - (void)layoutLabel
@@ -493,6 +480,44 @@
     self.addButton.frame = frame;
 }
 
+- (void)resizeIfNeeded:(BOOL)animated
+{
+    CGRect frame = self.frame;
+    CGFloat newHeight = self.rowHeight * self.rowNumber;
+
+    if (frame.size.height == newHeight) return;
+
+    frame.size.height = newHeight;
+
+    if ([self.delegate respondsToSelector:@selector(tokenField:willChangeFrameWithInfo:)]) {
+        [self.delegate tokenField:self willChangeFrameWithInfo:@{CTTokenFieldFrameKey : [NSValue valueWithCGRect:frame]}];
+    }
+
+    if (animated) {
+        [UIView animateWithDuration:CTTokenFieldAnimationDuration delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.frame = frame;
+        }                completion:^(BOOL finished) {
+            [self setNeedsDisplay];
+
+            if ([self.delegate respondsToSelector:@selector(tokenField:didChangeFrameWithInfo:)]) {
+                [self.delegate tokenField:self didChangeFrameWithInfo:@{CTTokenFieldFrameKey : [NSValue valueWithCGRect:frame]}];
+            }
+        }];
+    } else {
+        self.frame = frame;
+        [self setNeedsDisplay];
+
+        if ([self.delegate respondsToSelector:@selector(tokenField:didChangeFrameWithInfo:)]) {
+            [self.delegate tokenField:self didChangeFrameWithInfo:@{CTTokenFieldFrameKey : [NSValue valueWithCGRect:frame]}];
+        }
+    }
+}
+
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    return CGSizeMake(size.width, self.rowNumber * self.rowHeight);
+}
+
 #pragma mark - Gesture handling
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)gestureRecognizer
@@ -550,7 +575,11 @@
 
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         floatingTokenView.floating = NO;
-        [self setNeedsLayout];
+        [self layoutTokenViewsAnimated:YES];
+        [self layoutTextField];
+        [self layoutAddButton];
+
+        [self resizeIfNeeded:YES];
     }
 }
 
@@ -581,7 +610,11 @@
         [self.dataSource tokenField:self didMoveTokenViewFromIndex:fromIndex toIndex:toIndex];
     }
 
-    [self setNeedsLayout];
+    [self layoutTokenViewsAnimated:YES];
+    [self layoutTextField];
+    [self layoutAddButton];
+
+    [self resizeIfNeeded:YES];
 }
 
 - (BOOL)                         gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
@@ -601,9 +634,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         return NO;
     }
 
-    [self addTokenViewWithText:text];
-
-    textField.text = nil;
+    if ([self.dataSource tokenField:self shouldAddTokenViewWithText:text]) {
+        [self addTokenViewWithText:text];
+        textField.text = nil;
+    }
 
     [textField becomeFirstResponder];
 

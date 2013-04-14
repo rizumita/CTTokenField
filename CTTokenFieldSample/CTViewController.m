@@ -85,4 +85,39 @@
     [self.tokenField reloadData];
 }
 
+- (CGFloat)heightForRowInTokenField:(CTTokenField *)tokenField
+{
+    return 35;
+
+}
+
+- (void)tokenField:(CTTokenField *)tokenField willSelectTokenAtIndex:(NSUInteger)index1
+{
+
+}
+
+- (void)tokenField:(CTTokenField *)tokenField didSelectTokenAtIndex:(NSUInteger)index1
+{
+
+}
+
+- (void)tokenField:(CTTokenField *)tokenField willDeselectTokenAtIndex:(NSUInteger)index1
+{
+
+}
+
+- (void)tokenField:(CTTokenField *)tokenField didDeselectTokenAtIndex:(NSUInteger)index1
+{
+
+}
+
+- (void)tokenField:(CTTokenField *)tokenField willChangeFrameWithInfo:(NSDictionary *)info
+{
+}
+
+- (void)tokenField:(CTTokenField *)tokenField didChangeFrameWithInfo:(NSDictionary *)info
+{
+    NSLog(@"info: %@", info);
+}
+
 @end
