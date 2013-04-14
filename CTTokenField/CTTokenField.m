@@ -13,7 +13,9 @@
 #import "CTTokenTextField.h"
 
 
-NSString *const CTTokenFieldFrameKey = @"CTTokenFieldFrame";
+NSString *const CTTokenFieldChangeFrameKey = @"CTTokenFieldFrame";
+NSString *const CTTokenFieldChangeFrameAnimationOptionKey = @"CTTokenFieldChangeFrameAnimationOptionKey";
+NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChangeFrameAnimationDurationKey";
 
 
 @interface CTTokenField ()
@@ -53,6 +55,8 @@ NSString *const CTTokenFieldFrameKey = @"CTTokenFieldFrame";
     self.rowHeight = 0.0;
     self.rowNumber = 1;
     self.tokenViews = [NSMutableOrderedSet orderedSet];
+
+    self.backgroundColor = [UIColor clearColor];
 
     [self setUpLabel];
     [self setUpTextField];
@@ -491,26 +495,33 @@ NSString *const CTTokenFieldFrameKey = @"CTTokenFieldFrame";
 
     frame.size.height = newHeight;
 
-    if ([self.delegate respondsToSelector:@selector(tokenField:willChangeFrameWithInfo:)]) {
-        [self.delegate tokenField:self willChangeFrameWithInfo:@{CTTokenFieldFrameKey : [NSValue valueWithCGRect:frame]}];
-    }
-
     if (animated) {
+        if ([self.delegate respondsToSelector:@selector(tokenField:willChangeFrameWithInfo:)]) {
+            [self.delegate tokenField:self willChangeFrameWithInfo:@{
+                    CTTokenFieldChangeFrameKey : [NSValue valueWithCGRect:frame],
+                    CTTokenFieldChangeFrameAnimationOptionKey : [NSNumber numberWithUnsignedInteger:UIViewAnimationOptionCurveLinear],
+                    CTTokenFieldChangeFrameAnimationDurationKey : [NSNumber numberWithDouble:CTTokenFieldAnimationDuration]}];
+        }
+
         [UIView animateWithDuration:CTTokenFieldAnimationDuration delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.frame = frame;
         }                completion:^(BOOL finished) {
             [self setNeedsDisplay];
 
             if ([self.delegate respondsToSelector:@selector(tokenField:didChangeFrameWithInfo:)]) {
-                [self.delegate tokenField:self didChangeFrameWithInfo:@{CTTokenFieldFrameKey : [NSValue valueWithCGRect:frame]}];
+                [self.delegate tokenField:self didChangeFrameWithInfo:@{CTTokenFieldChangeFrameKey : [NSValue valueWithCGRect:frame]}];
             }
         }];
     } else {
+        if ([self.delegate respondsToSelector:@selector(tokenField:willChangeFrameWithInfo:)]) {
+            [self.delegate tokenField:self willChangeFrameWithInfo:@{CTTokenFieldChangeFrameKey : [NSValue valueWithCGRect:frame]}];
+        }
+
         self.frame = frame;
         [self setNeedsDisplay];
 
         if ([self.delegate respondsToSelector:@selector(tokenField:didChangeFrameWithInfo:)]) {
-            [self.delegate tokenField:self didChangeFrameWithInfo:@{CTTokenFieldFrameKey : [NSValue valueWithCGRect:frame]}];
+            [self.delegate tokenField:self didChangeFrameWithInfo:@{CTTokenFieldChangeFrameKey : [NSValue valueWithCGRect:frame]}];
         }
     }
 }

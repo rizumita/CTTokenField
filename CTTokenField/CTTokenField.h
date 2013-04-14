@@ -22,7 +22,11 @@
 
 #define CTTokenFieldAnimationDuration 0.2
 
-extern NSString *const CTTokenFieldFrameKey;
+extern NSString *const CTTokenFieldChangeFrameKey;
+
+extern NSString *const CTTokenFieldChangeFrameAnimationOptionKey;
+
+extern NSString *const CTTokenFieldChangeFrameAnimationDurationKey;
 
 @class CTTokenView;
 
