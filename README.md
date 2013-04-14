@@ -6,6 +6,12 @@ CTTokenField is a token filed component for iOS.
 Sample
 ==========
 
+Prepare data container
+----------
+```Objective-C
+self.texts = [NSMutableArray array];
+```
+
 Create token field view
 ----------
 ```Objective-C
