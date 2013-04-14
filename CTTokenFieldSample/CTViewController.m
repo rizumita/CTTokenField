@@ -12,7 +12,7 @@
 
 @interface CTViewController ()
 
-@property (nonatomic, strong) NSMutableOrderedSet *texts;
+@property (nonatomic, strong) NSMutableArray *texts;
 @end
 
 @implementation CTViewController
@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.texts = [NSMutableOrderedSet orderedSet];
+    self.texts = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,6 +54,11 @@
     return @"Sample:";
 }
 
+- (BOOL)tokenField:(CTTokenField *)tokenField shouldAddTokenViewWithText:(NSString *)text
+{
+    return YES;
+}
+
 - (void)tokenField:(CTTokenField *)tokenField willAddTokenViewWithText:(NSString *)text atIndex:(NSUInteger)index
 {
     [self.texts insertObject:text atIndex:index];
@@ -67,7 +72,9 @@
 - (void)tokenField:(CTTokenField *)tokenField willMoveTokenViewFromIndex:(NSUInteger)fromIndex
            toIndex:(NSUInteger)toIndex
 {
-    [self.texts moveObjectsAtIndexes:[NSIndexSet indexSetWithIndex:fromIndex] toIndex:toIndex];
+    NSString *string=[self.texts objectAtIndex:fromIndex];
+    [self.texts removeObjectAtIndex:fromIndex];
+    [self.texts insertObject:string atIndex:toIndex];
 }
 
 #pragma mark - CTTokenFieldDelegate
