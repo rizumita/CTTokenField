@@ -1,7 +1,7 @@
 CTTokenField
 ============
 
-CTTokenField is a token filed component for iOS.
+CTTokenField is a token filed component for iOS6+.
 
 ![CTTokenField](http://f.cl.ly/items/02123U0r3j1i2v3e250r/cttokenfield.png)
 
