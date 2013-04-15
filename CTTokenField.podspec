@@ -8,5 +8,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/rizumita/CTTokenField.git", :tag => "0.0.1" }
   s.platform     = :ios, '6.0'
   s.source_files = 'CTTokenField/*.{h,m}'
+  s.framework    = 'QuartzCore'
   s.requires_arc = true
 end
