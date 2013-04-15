@@ -3,6 +3,8 @@ CTTokenField
 
 CTTokenField is a token filed component for iOS.
 
+![CTTokenField](http://f.cl.ly/items/260T2R3Q211V2u37111t/cttokenfield.png)
+
 Sample
 ==========
 
