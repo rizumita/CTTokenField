@@ -172,4 +172,9 @@
     }
 }
 
+- (void)tokenField:(CTTokenField *)tokenField textFieldWillChangeWithText:(NSString *)text
+{
+    NSLog(@"%@", text);
+}
+
 @end

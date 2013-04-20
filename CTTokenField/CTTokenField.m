@@ -657,4 +657,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return NO;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string
+{
+    if([self.delegate respondsToSelector:@selector(tokenField:textFieldWillChangeWithText:)]){
+        [self.delegate tokenField:self textFieldWillChangeWithText:[textField.text stringByReplacingCharactersInRange:range withString:string]];
+    }
+
+    return YES;
+}
+
 @end
