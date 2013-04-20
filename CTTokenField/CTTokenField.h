@@ -124,4 +124,7 @@ extern NSString *const CTTokenFieldChangeFrameAnimationDurationKey;
 
 - (void)tokenField:(CTTokenField *)tokenField didChangeFrameWithInfo:(NSDictionary *)info;
 
+/* Propagate Changing TextField's Text */
+- (void)tokenField:(CTTokenField *)tokenField textFieldWillChangeWithText:(NSString *)text;
+
 @end
