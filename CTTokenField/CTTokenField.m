@@ -643,7 +643,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     NSString *text = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
     if (text.length == 0) {
-        [self.nextResponder becomeFirstResponder];
+        [textField resignFirstResponder];
+
+        if ([self.delegate respondsToSelector:@selector(textFieldDidResignFirstResponderInTokenField:)]) {
+            [self.delegate textFieldDidResignFirstResponderInTokenField:self];
+        }
         return NO;
     }
 
@@ -660,7 +664,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
-    if([self.delegate respondsToSelector:@selector(tokenField:textFieldWillChangeWithText:)]){
+    if ([self.delegate respondsToSelector:@selector(tokenField:textFieldWillChangeWithText:)]) {
         [self.delegate tokenField:self textFieldWillChangeWithText:[textField.text stringByReplacingCharactersInRange:range withString:string]];
     }
 
