@@ -245,12 +245,12 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
         if ([self.dataSource respondsToSelector:@selector(tokenField:didAddTokenViewWithText:atIndex:)]) {
             [self.dataSource tokenField:self didAddTokenViewWithText:text atIndex:index];
         }
-
-        [self layoutTokenViewsAnimated:NO];
-        [self layoutTextField];
-        [self layoutAddButton];
-        [self resizeIfNeeded:YES];
     }
+
+    [self layoutTokenViewsAnimated:NO];
+    [self layoutTextField];
+    [self layoutAddButton];
+    [self resizeIfNeeded:YES];
 }
 
 - (void)removeTokenView:(CTTokenView *)tokenView
