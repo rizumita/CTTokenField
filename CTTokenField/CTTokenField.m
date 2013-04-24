@@ -24,12 +24,14 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
 @property (nonatomic) NSUInteger rowNumber;
 @property (nonatomic, readonly) CGRect textFieldFrame;
 @property (nonatomic, readonly) CTTokenView *floatingTokenView;
+@property (nonatomic, strong) UIView *containerView;
 @end
 
 @implementation CTTokenField
 {
     UILabel *_label;
     UITextField *_textField;
+    BOOL _isSearchMode;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -56,8 +58,9 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     self.rowNumber = 1;
     self.tokenViews = [NSMutableOrderedSet orderedSet];
 
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
 
+    [self setUpScrollView];
     [self setUpLabel];
     [self setUpTextField];
 
@@ -68,12 +71,20 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     [self addGestureRecognizer:panGestureRecognizer];
 }
 
+- (void)setUpScrollView
+{
+    self.containerView = [[UIView alloc] initWithFrame:self.bounds];
+    self.containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.containerView.backgroundColor = [UIColor clearColor];
+    [self addSubview:self.containerView];
+}
+
 - (void)setUpLabel
 {
     _label = [[UILabel alloc] initWithFrame:CGRectZero];
     _label.backgroundColor = [UIColor clearColor];
     _label.textColor = [UIColor grayColor];
-    [self addSubview:_label];
+    [self.containerView addSubview:_label];
 }
 
 - (void)setUpTextField
@@ -84,7 +95,7 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    [self addSubview:_textField];
+    [self.containerView addSubview:_textField];
 }
 
 - (UIButton *)addButton
@@ -98,7 +109,7 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     }
 
     [_addButton addTarget:self action:@selector(addButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_addButton];
+    [self.containerView addSubview:_addButton];
 
     return _addButton;
 }
@@ -221,10 +232,12 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
             [self addSubview:tokenView];
         }
 
+        self.textField.text = nil;
         [self layoutTokenViewsAnimated:NO];
         [self layoutTextField];
         [self layoutAddButton];
-        [self resizeIfNeeded:NO];
+        [self resizeIfNeeded:NO completion:^{
+        }];
     }
 }
 
@@ -239,18 +252,19 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
 
         CTTokenView *tokenView = [self.dataSource tokenField:self tokenViewAtIndex:index];
         tokenView.tokenField = self;
-        [self addSubview:tokenView];
+        [self.containerView addSubview:tokenView];
         [self.tokenViews insertObject:tokenView atIndex:index];
 
         if ([self.dataSource respondsToSelector:@selector(tokenField:didAddTokenViewWithText:atIndex:)]) {
             [self.dataSource tokenField:self didAddTokenViewWithText:text atIndex:index];
         }
-
-        [self layoutTokenViewsAnimated:NO];
-        [self layoutTextField];
-        [self layoutAddButton];
-        [self resizeIfNeeded:YES];
     }
+
+    [self layoutTokenViewsAnimated:NO];
+    [self layoutTextField];
+    [self layoutAddButton];
+    [self resizeIfNeeded:YES completion:^{
+    }];
 }
 
 - (void)removeTokenView:(CTTokenView *)tokenView
@@ -330,6 +344,48 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     }
 }
 
+#pragma mark - Search mode
+
+- (BOOL)isSearchMode
+{
+    return _isSearchMode;
+}
+
+- (void)becomeSearchModeWithText:(NSString *)text
+{
+    if (!_isSearchMode) {
+        [self willChangeValueForKey:@"isSearchMode"];
+        _isSearchMode = YES;
+        [self didChangeValueForKey:@"isSearchMode"];
+
+        [self resizeIfNeeded:YES completion:^{
+            if ([self.delegate respondsToSelector:@selector(tokenField:didBecomeSearchModeWithText:)]) {
+                [self.delegate tokenField:self didBecomeSearchModeWithText:text];
+            }
+        }];
+    } else {
+        if ([self.delegate respondsToSelector:@selector(tokenField:didBecomeSearchModeWithText:)]) {
+            [self.delegate tokenField:self didBecomeSearchModeWithText:text];
+        }
+    }
+}
+
+- (void)resignSearchMode
+{
+    if (!_isSearchMode) return;
+
+    [self willChangeValueForKey:@"isSearchMode"];
+    _isSearchMode = NO;
+    [self didChangeValueForKey:@"isSearchMode"];
+
+    if ([self.delegate respondsToSelector:@selector(tokenFieldWillResignSearchMode:)]) {
+        [self.delegate tokenFieldWillResignSearchMode:self];
+    }
+
+    [self resizeIfNeeded:YES completion:^{
+    }];
+}
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect
@@ -363,7 +419,8 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     [self layoutTextField];
     [self layoutAddButton];
 
-    [self resizeIfNeeded:NO];
+    [self resizeIfNeeded:NO completion:^{
+    }];
 }
 
 - (void)layoutLabel
@@ -486,14 +543,26 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     self.addButton.frame = frame;
 }
 
-- (void)resizeIfNeeded:(BOOL)animated
+- (void)resizeIfNeeded:(BOOL)animated completion:(void (^)())completion
 {
     CGRect frame = self.frame;
+    CGRect containerFrame = self.containerView.frame;
+
     CGFloat newHeight = self.rowHeight * self.rowNumber;
 
-    if (frame.size.height == newHeight) return;
+    if (self.isSearchMode) {
+        containerFrame.origin.y = -frame.size.height + self.rowHeight;
 
-    frame.size.height = newHeight;
+        frame.size.height = self.rowHeight;
+
+        self.clipsToBounds = YES;
+    } else {
+        containerFrame.origin.y = 0.0;
+
+        if (frame.size.height == newHeight) return;
+
+        frame.size.height = newHeight;
+    }
 
     if (animated) {
         if ([self.delegate respondsToSelector:@selector(tokenField:willChangeFrameWithInfo:)]) {
@@ -505,12 +574,20 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
 
         [UIView animateWithDuration:CTTokenFieldAnimationDuration delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.frame = frame;
+
+            self.containerView.frame = containerFrame;
         }                completion:^(BOOL finished) {
             [self setNeedsDisplay];
 
             if ([self.delegate respondsToSelector:@selector(tokenField:didChangeFrameWithInfo:)]) {
                 [self.delegate tokenField:self didChangeFrameWithInfo:@{CTTokenFieldChangeFrameKey : [NSValue valueWithCGRect:frame]}];
             }
+
+            if (!self.isSearchMode) {
+                self.clipsToBounds = NO;
+            }
+
+            if (completion) completion();
         }];
     } else {
         if ([self.delegate respondsToSelector:@selector(tokenField:willChangeFrameWithInfo:)]) {
@@ -523,6 +600,12 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
         if ([self.delegate respondsToSelector:@selector(tokenField:didChangeFrameWithInfo:)]) {
             [self.delegate tokenField:self didChangeFrameWithInfo:@{CTTokenFieldChangeFrameKey : [NSValue valueWithCGRect:frame]}];
         }
+
+        if (!self.isSearchMode) {
+            self.clipsToBounds = NO;
+        }
+
+        if (completion) completion();
     }
 }
 
@@ -538,6 +621,12 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     CGPoint location = [gestureRecognizer locationInView:self];
     CTTokenView *touchedTokenView = [self tokenViewAtLocation:location];
     CTTokenView *highlightedTokenView = self.selectedTokenView;
+
+    if (self.isSearchMode) {
+        [self addTokenViewWithText:self.textField.text];
+        self.textField.text = nil;
+        [self resignSearchMode];
+    }
 
     if (!touchedTokenView) {
         [self.textField becomeFirstResponder];
@@ -563,6 +652,18 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)gestureRecognizer
 {
+    if (self.isSearchMode) {
+        [self addTokenViewWithText:self.textField.text];
+        self.textField.text = nil;
+        [self resignSearchMode];
+
+        // Cancel gesture recognizer
+        gestureRecognizer.enabled = NO;
+        gestureRecognizer.enabled = YES;
+
+        return;
+    }
+
     CGPoint location = [gestureRecognizer locationInView:self];
     CTTokenView *tokenView = [self tokenViewAtLocation:location];
 
@@ -592,7 +693,8 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
         [self layoutTextField];
         [self layoutAddButton];
 
-        [self resizeIfNeeded:YES];
+        [self resizeIfNeeded:YES completion:^{
+        }];
     }
 }
 
@@ -627,7 +729,8 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     [self layoutTextField];
     [self layoutAddButton];
 
-    [self resizeIfNeeded:YES];
+    [self resizeIfNeeded:YES completion:^{
+    }];
 }
 
 - (BOOL)                         gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
@@ -653,6 +756,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
     if ([self.dataSource tokenField:self shouldAddTokenViewWithText:text]) {
         [self addTokenViewWithText:text];
+        [self resignSearchMode];
         textField.text = nil;
     }
 
@@ -664,8 +768,19 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if ([self.delegate respondsToSelector:@selector(tokenField:textFieldWillChangeWithText:)]) {
-        [self.delegate tokenField:self textFieldWillChangeWithText:[textField.text stringByReplacingCharactersInRange:range withString:string]];
+        [self.delegate tokenField:self textFieldWillChangeWithText:newText];
+    }
+
+    if ([self.delegate respondsToSelector:@selector(tokenField:shouldBecomeSearchModeWithText:)]) {
+        if ([self.delegate tokenField:self shouldBecomeSearchModeWithText:newText]) {
+            [self becomeSearchModeWithText:newText];
+        } else {
+            if (self.isSearchMode) {
+                [self resignSearchMode];
+            }
+        }
     }
 
     return YES;

@@ -51,6 +51,8 @@ extern NSString *const CTTokenFieldChangeFrameAnimationDurationKey;
 
 @property (nonatomic, readonly) CGFloat maxTokenViewWidth;
 
+@property (nonatomic, readonly) BOOL isSearchMode;
+
 - (void)reloadData;
 
 - (void)removeTokenView:(CTTokenView *)tokenView;
@@ -67,6 +69,10 @@ extern NSString *const CTTokenFieldChangeFrameAnimationDurationKey;
 
 - (void)deselectTokenViewAtIndex:(NSUInteger)index;
 
+- (void)becomeSearchModeWithText:(NSString *)text;
+
+- (void)resignSearchMode;
+
 - (CTTokenView *)tokenViewAtLocation:(CGPoint)location;
 @end
 
@@ -82,14 +88,16 @@ extern NSString *const CTTokenFieldChangeFrameAnimationDurationKey;
 
 - (void)tokenField:(CTTokenField *)tokenField willRemoveTokenViewAtIndex:(NSUInteger)index;
 
-- (void)tokenField:(CTTokenField *)tokenField willMoveTokenViewFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)tokenField:(CTTokenField *)tokenField willMoveTokenViewFromIndex:(NSUInteger)fromIndex
+           toIndex:(NSUInteger)toIndex;
 
 @optional
 - (void)tokenField:(CTTokenField *)tokenField didAddTokenViewWithText:(NSString *)text atIndex:(NSUInteger)index;
 
 - (void)tokenField:(CTTokenField *)tokenField didRemoveTokenViewAtIndex:(NSUInteger)index;
 
-- (void)tokenField:(CTTokenField *)tokenField didMoveTokenViewFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)tokenField:(CTTokenField *)tokenField didMoveTokenViewFromIndex:(NSUInteger)fromIndex
+           toIndex:(NSUInteger)toIndex;
 
 @end
 
@@ -128,4 +136,11 @@ extern NSString *const CTTokenFieldChangeFrameAnimationDurationKey;
 - (void)tokenField:(CTTokenField *)tokenField textFieldWillChangeWithText:(NSString *)text;
 
 - (void)textFieldDidResignFirstResponderInTokenField:(CTTokenField *)tokenField;
+
+/* Managing Search Mode */
+- (BOOL)tokenField:(CTTokenField *)tokenField shouldBecomeSearchModeWithText:(NSString *)text;
+
+- (void)tokenField:(CTTokenField *)tokenField didBecomeSearchModeWithText:(NSString *)text;
+
+- (void)tokenFieldWillResignSearchMode:(CTTokenField *)tokenField;
 @end
