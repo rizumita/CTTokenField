@@ -623,9 +623,11 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
     CTTokenView *highlightedTokenView = self.selectedTokenView;
 
     if (self.isSearchMode) {
-        [self addTokenViewWithText:self.textField.text];
-        self.textField.text = nil;
-        [self resignSearchMode];
+        if ([self.dataSource tokenField:self shouldAddTokenViewWithText:self.textField.text]) {
+            [self addTokenViewWithText:self.textField.text];
+            self.textField.text = nil;
+            [self resignSearchMode];
+        }
     }
 
     if (!touchedTokenView) {
