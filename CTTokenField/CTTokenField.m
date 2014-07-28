@@ -496,8 +496,10 @@ NSString *const CTTokenFieldChangeFrameAnimationDurationKey = @"CTTokenFieldChan
 - (void)layoutTextField
 {
     CGFloat addButtonWidthWithSideSpace = CGRectGetWidth(self.addButton.frame) + CTTokenFieldAddButtonPadding * 2;
-
-    __block void (^block)(NSUInteger row) = ^(NSUInteger row) {
+    __block void (^block)(NSUInteger row);
+    void (^tmpblock)(NSUInteger row);
+    
+    block = tmpblock = ^(NSUInteger row) {
         CGRect containerFrame = [self containerFrameAtRow:row];
         NSArray *tokenViews = [self tokenViewsInContainerFrame:containerFrame];
         containerFrame.size.width -= addButtonWidthWithSideSpace - CTTokenFieldTokenViewInterval;
